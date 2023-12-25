@@ -16,13 +16,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.btl_application.ApiConnect.ApiService;
-import com.example.btl_application.Model.AccessResponse;
 import com.example.btl_application.Model.SimpleMessage;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -102,9 +98,9 @@ public class SignInActivity extends AppCompatActivity {
         });
     }
     private void taoTaiKhoan() {
-        String account = etAccount.getText().toString();
-        String password = etPassword.getText().toString();
-        String password2 = etPassword2.getText().toString();
+        String account = etAccount.getText().toString().trim();
+        String password = etPassword.getText().toString().trim();
+        String password2 = etPassword2.getText().toString().trim();
         if (account.isEmpty()) {
             showDialog.showAlertDialog(this, "Yêu cầu", "Nhập tên tài khoản");
             return;

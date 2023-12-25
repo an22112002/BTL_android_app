@@ -28,6 +28,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Writer;
+import java.util.Arrays;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -40,15 +42,16 @@ public class LoginActivity extends AppCompatActivity {
     Button btnAccess;
     public boolean lookPassword = false;
     public String saveFile = "lastAccess.txt";
-    public String lastAccess = "";
+    public String lastAccess;
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         getWidget();
-        String lastAccessAccount = readFile();
-        etAccount.setText(lastAccessAccount);
+        lastAccess = readFile();
+        if (lastAccess != null)
+            etAccount.setText(lastAccess);
         btnAccess.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,13 +99,13 @@ public class LoginActivity extends AppCompatActivity {
             fis.close();
             return line;
         } catch (IOException ex) {
-            return "";
+            return null;
         }
     }
-    private void writeFile(String account) {
+    private void writeFile(String name) {
         try {
             FileOutputStream fos = this.openFileOutput(saveFile, Context.MODE_PRIVATE);
-            fos.write(account.getBytes());
+            fos.write(name.getBytes());
             fos.close();
         } catch (IOException ignored) { }
     }
@@ -121,6 +124,8 @@ public class LoginActivity extends AppCompatActivity {
                         writeFile(etAccount.getText().toString());
                         Intent mainIntent = new Intent(LoginActivity.this, MainActivity.class);
                         mainIntent.putExtra("id", id);
+                        mainIntent.putExtra("name", etAccount.getText().toString());
+                        mainIntent.putExtra("pass", etPassword.getText().toString());
                         startActivity(mainIntent);
                         finish();
                     } else {

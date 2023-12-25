@@ -16,6 +16,24 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".ThongKe"
+            android:exported="false" />
+        <activity
+            android:name=".changePassword"
+            android:exported="false" />
+        <activity
+            android:name=".editSection"
+            android:exported="false" />
+        <activity
+            android:name=".AddSection"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity2"
+            android:exported="false" />
+        <activity
+            android:name=".AddProgram"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="false" />
         <activity
